@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Дмитрий Алексеев](https://up.htmlacademy.ru/javascript/17/user/916769).
-* Наставник: `Неизвестно`.
+* Наставник: [Андрей Соколов](https://htmlacademy.ru/profile/id202891).
 
 ---
 
