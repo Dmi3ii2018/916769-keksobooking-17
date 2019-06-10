@@ -3,29 +3,29 @@ var apartmentTypes = ['palace', 'flat', 'house', 'bungalo'];
 
 var MIN_RANGE = 0;
 var MAX_RANGE = apartmentTypes.length;
-var PIN_MIN_RANGE = 60;
+var PIN_MIN_RANGE = 130;
 var PIN_X_MAX_RANGE = 1140;
 var PIN_Y_MAX_RANGE = 630;
 var NEIGHBORS_NUMBER = 8;
 
-//блок для вставки пинов
-var mapPinsContainer = document.querySelector('.map-pins');
-//шаблон пина
+// блок для вставки пинов
+var mapPinsContainer = document.querySelector('.map__pins');
+// шаблон пина
 var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
 
 var neighbors = [];
 
-//случайный тип квартиры
-var getApartmentTypes = function  (MIN_RANGE, MAX_RANGE) {
-  return apartmentTypes[Math.floor(Math.random() * (MAX_RANGE - MIN_RANGE) + MIN_RANGE)]
+// случайный тип квартиры
+var getApartmentTypes = function (min, max) {
+  return apartmentTypes[Math.floor(Math.random() * (max - min) + min)];
 };
 
-//случайные координаты для пина
+// случайные координаты для пина
 var getPinCoordinate = function (min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 };
 
-//создать данные для профилей соседей
+// создать данные для профилей соседей
 var createNeighborPin = function (x) {
   neighbors[x] = [
     {
@@ -42,23 +42,23 @@ var createNeighborPin = function (x) {
         y: getPinCoordinate(PIN_MIN_RANGE, PIN_Y_MAX_RANGE)
       }
     }
-  ]
+  ];
 };
 
-//генерация похожих объявлений
+// генерация похожих объявлений
 var makeRandomNeighbors = function () {
   for (var i = 0; i < NEIGHBORS_NUMBER; i++) {
     createNeighborPin(i);
   }
 };
 
-//собрать массив соседей
+// собрать массив соседей
 makeRandomNeighbors();
 
-//Временно у блока .map уберем класс .map--faded
+// Временно у блока .map уберем класс .map--faded
 document.querySelector('.map').classList.remove('map--faded');
 
-//новый элемент
+// новый элемент
 var getPin = function (neighbor) {
   var mapPin = pinTemplate.cloneNode(true);
 
@@ -71,16 +71,13 @@ var getPin = function (neighbor) {
   return mapPin;
 };
 
-// Добавление элемента на страницу
+// добавление элемента на страницу
 var addPin = function () {
   var fragment = document.createDocumentFragment();
-for (var i = 0; i < NEIGHBORS_NUMBER; i++) {
-  fragment.appendChild(getPin(neighbors[i]));
-}
+  for (var i = 0; i < NEIGHBORS_NUMBER; i++) {
+    fragment.appendChild(getPin(neighbors[i]));
+  }
   mapPinsContainer.appendChild(fragment);
 };
 
 addPin();
-
-
-
