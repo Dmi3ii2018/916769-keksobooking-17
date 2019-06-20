@@ -13,66 +13,49 @@ var mapPinsContainer = document.querySelector('.map__pins');
 // шаблон пина
 var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
 
-var neighbors = [];
-
-// случайный тип квартиры
-var getApartmentTypes = function (min, max) {
-  return apartmentTypes[Math.floor(Math.random() * (max - min) + min)];
-};
-
-// случайные координаты для пина
-var getPinCoordinate = function (min, max) {
+// генератор случайных чисел
+var getRandomNumber = function (min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 };
 
 // создать данные для профилей соседей
-var createNeighborPin = function (x) {
-  neighbors[x] = [
-    {
+var createNeighborPin = function () {
+  var neighborsList = [];
+  for (var i = 0; i < NEIGHBORS_NUMBER; i++) {
+    neighborsList[i] = {
       author: {
-        avatar: 'img/avatars/user0' + (x + 1) + '.png'
+        avatar: 'img/avatars/user0' + (i + 1) + '.png'
       },
 
       offer: {
-        type: getApartmentTypes(MIN_RANGE, MAX_RANGE)
+        type: getRandomNumber(MIN_RANGE, MAX_RANGE)
       },
 
       location: {
-        x: getPinCoordinate(PIN_MIN_RANGE, PIN_X_MAX_RANGE),
-        y: getPinCoordinate(PIN_MIN_RANGE, PIN_Y_MAX_RANGE)
+        x: getRandomNumber(PIN_MIN_RANGE, PIN_X_MAX_RANGE),
+        y: getRandomNumber(PIN_MIN_RANGE, PIN_Y_MAX_RANGE)
       }
-    }
-  ];
-};
-
-// генерация похожих объявлений
-var makeRandomNeighbors = function () {
-  for (var i = 0; i < NEIGHBORS_NUMBER; i++) {
-    createNeighborPin(i);
+    };
   }
+  return neighborsList;
 };
-
-// собрать массив соседей
-makeRandomNeighbors();
-
-// Временно у блока .map уберем класс .map--faded
-document.querySelector('.map').classList.remove('map--faded');
 
 // новый элемент
 var getPin = function (neighbor) {
   var mapPin = pinTemplate.cloneNode(true);
 
-  mapPin.style.left = neighbor[0].location.x + 'px';
-  mapPin.style.top = neighbor[0].location.y + 'px';
+  mapPin.style.left = neighbor.location.x + 'px';
+  mapPin.style.top = neighbor.location.y + 'px';
 
-  mapPin.querySelector('img').src = neighbor[0].author.avatar;
-  mapPin.querySelector('img').alt = neighbor[0].offer.type;
+  mapPin.querySelector('img').src = neighbor.author.avatar;
+  mapPin.querySelector('img').alt = neighbor.offer.type;
 
   return mapPin;
 };
 
 // добавление элемента на страницу
 var addPin = function () {
+  var neighbors = createNeighborPin();
   var fragment = document.createDocumentFragment();
   for (var i = 0; i < NEIGHBORS_NUMBER; i++) {
     fragment.appendChild(getPin(neighbors[i]));
@@ -80,4 +63,48 @@ var addPin = function () {
   mapPinsContainer.appendChild(fragment);
 };
 
-addPin();
+// =================================
+// добавление обработчиков события
+
+var mapContainer = document.querySelector('.map');
+var mapFilters = mapContainer.querySelector('.map__filters');
+var mapFiltersInput = mapFilters.querySelectorAll('input');
+var mapFiltersSelector = mapFilters.querySelectorAll('select');
+var adForm = document.querySelector('.ad-form');
+var adFormInput = adForm.querySelectorAll('input');
+var adFormSelector = adForm.querySelectorAll('select');
+var adFormTextarea = adForm.querySelectorAll('textarea');
+var addressInput = adForm.querySelector('#address');
+
+var mapPinMain = document.querySelector('.map__pin--main');
+
+var putAttribute = function (elementsList, attributeName, attributeValue) {
+  for (var i = 0; i < elementsList.length; i++) {
+    elementsList[i].setAttribute(attributeName, attributeValue);
+  }
+};
+
+var deleteAttribute = function (elementsList, attributeName) {
+  for (var i = 0; i < elementsList.length; i++) {
+    elementsList[i].removeAttribute(attributeName);
+  }
+};
+
+// добавим атрибут disabled для полей форм
+putAttribute(adFormInput, 'disabled', 'disabled');
+putAttribute(adFormSelector, 'disabled', 'disabled');
+putAttribute(adFormTextarea, 'disabled', 'disabled');
+putAttribute(mapFiltersSelector, 'disabled', 'disabled');
+putAttribute(mapFiltersInput, 'disabled', 'disabled');
+
+mapPinMain.addEventListener('click', function () {
+  mapContainer.classList.remove('map--faded');
+  adForm.classList.remove('ad-form--disabled');
+  deleteAttribute(adFormInput, 'disabled');
+  deleteAttribute(adFormSelector, 'disabled');
+  deleteAttribute(adFormTextarea, 'disabled');
+  deleteAttribute(mapFiltersSelector, 'disabled');
+  deleteAttribute(mapFiltersInput, 'disabled');
+  addressInput.setAttribute('value', 'x:' + mapPinMain.offsetLeft + ', ' + 'y:' + mapPinMain.offsetTop);
+  addPin();
+});
