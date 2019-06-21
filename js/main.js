@@ -105,6 +105,7 @@ mapPinMain.addEventListener('click', function () {
   deleteAttribute(adFormTextarea, 'disabled');
   deleteAttribute(mapFiltersSelector, 'disabled');
   deleteAttribute(mapFiltersInput, 'disabled');
-  addressInput.setAttribute('value', 'x:' + mapPinMain.offsetLeft + ', ' + 'y:' + mapPinMain.offsetTop);
+  addressInput.setAttribute('value', mapPinMain.offsetLeft + ', ' + mapPinMain.offsetTop);
+  addressInput.setAttribute('disabled', 'disabled');
   addPin();
 });
