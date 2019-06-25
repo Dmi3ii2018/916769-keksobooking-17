@@ -1,10 +1,5 @@
 'use strict';
 (function () {
-  // var removeOnMoveListener = function (param, restriction) {
-  //   document.removeEventListener('mousemove', window.onMouseMove);
-  //   window.mapPinMain.style.param = restriction + 'px';
-  // };
-  // var left = window.left;
   window.mapPinWidth = window.mapPinMain.offsetWidth;
   window.mapPinHeight = window.mapPinMain.offsetHeight + 22;
 
