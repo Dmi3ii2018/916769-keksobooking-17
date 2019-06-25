@@ -1,7 +1,8 @@
 'use strict';
 
 (function () {
-  window.mapPinMain = document.querySelector('.map__pin--main');
+  var mapPinMain = document.querySelector('.map__pin--main');
+  window.mapPinMain = mapPinMain;
 
   window.mapPinMain.addEventListener('mousedown', function (evt) {
     evt.preventDefault();

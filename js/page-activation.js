@@ -1,8 +1,9 @@
 'use strict';
 
 (function () {
-  window.mapContainer = document.querySelector('.map');
-  var mapFilters = window.mapContainer.querySelector('.map__filters');
+  var mapContainer = document.querySelector('.map');
+  window.mapContainer = mapContainer;
+  var mapFilters = mapContainer.querySelector('.map__filters');
   var mapFiltersInput = mapFilters.querySelectorAll('input');
   var mapFiltersSelector = mapFilters.querySelectorAll('select');
   var adForm = document.querySelector('.ad-form');
@@ -38,7 +39,7 @@
   putAttribute(mapFiltersInput, 'disabled', 'disabled');
 
   window.onPinActivate = function () {
-    window.mapContainer.classList.remove('map--faded');
+    mapContainer.classList.remove('map--faded');
     adForm.classList.remove('ad-form--disabled');
     deleteAttribute(adFormInput, 'disabled');
     deleteAttribute(adFormSelector, 'disabled');
@@ -51,6 +52,7 @@
     window.setAddressInputValue(window.mapPinMain.offsetLeft, window.mapPinMain.offsetTop);
     window.mapPinMain.removeEventListener('mouseup', window.onPinActivate);
   };
-  window.mapPinMain.addEventListener('mouseup', window.onPinActivate); // правильно ли так добавлять?
+
+  window.mapPinMain.addEventListener('mouseup', window.onPinActivate);
 
 })();
