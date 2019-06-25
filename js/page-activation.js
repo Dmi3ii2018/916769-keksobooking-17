@@ -1,8 +1,8 @@
 'use strict';
 
 (function () {
-  var mapContainer = document.querySelector('.map');
-  var mapFilters = mapContainer.querySelector('.map__filters');
+  window.mapContainer = document.querySelector('.map');
+  var mapFilters = window.mapContainer.querySelector('.map__filters');
   var mapFiltersInput = mapFilters.querySelectorAll('input');
   var mapFiltersSelector = mapFilters.querySelectorAll('select');
   var adForm = document.querySelector('.ad-form');
@@ -11,7 +11,7 @@
   var adFormTextarea = adForm.querySelectorAll('textarea');
   var addressInput = adForm.querySelector('#address');
 
-  var mapPinMain = document.querySelector('.map__pin--main');
+  window.mapPinMain = document.querySelector('.map__pin--main');
 
   var putAttribute = function (elementsList, attributeName, attributeValue) {
     for (var i = 0; i < elementsList.length; i++) {
@@ -27,7 +27,9 @@
 
 
   var setAddressInputValue = function (coordX, coordY) {
-    addressInput.setAttribute('value', coordX + ', ' + coordY);
+    var addressX = Math.floor(coordX + (window.mapPinWidth / 2));
+    var addressY = Math.floor(coordY + window.mapPinHeight);
+    addressInput.setAttribute('value', addressX + ', ' + addressY);
   };
 
   // добавим атрибут disabled для полей форм
@@ -38,7 +40,7 @@
   putAttribute(mapFiltersInput, 'disabled', 'disabled');
 
   var onPinActivate = function () {
-    mapContainer.classList.remove('map--faded');
+    window.mapContainer.classList.remove('map--faded');
     adForm.classList.remove('ad-form--disabled');
     deleteAttribute(adFormInput, 'disabled');
     deleteAttribute(adFormSelector, 'disabled');
@@ -48,13 +50,13 @@
     addressInput.setAttribute('disabled', 'disabled');
     window.addPin();
 
-    setAddressInputValue(mapPinMain.offsetLeft, mapPinMain.offsetTop);
-    mapPinMain.removeEventListener('mouseup', onPinActivate);
+    setAddressInputValue(window.mapPinMain.offsetLeft, window.mapPinMain.offsetTop);
+    window.mapPinMain.removeEventListener('mouseup', onPinActivate);
   };
 
-  mapPinMain.addEventListener('mouseup', onPinActivate); // правильно ли так добавлять?
+  window.mapPinMain.addEventListener('mouseup', onPinActivate); // правильно ли так добавлять?
 
-  mapPinMain.addEventListener('mousedown', function (evt) {
+  window.mapPinMain.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
 
     var startCoords = {
@@ -62,8 +64,11 @@
       y: evt.clientY
     };
 
-    var onMouseMove = function (moveEvt) {
+    window.onMouseMove = function (moveEvt) {
       evt.preventDefault();
+
+      window.mapPinRestriction.setRestrictionY(window.mapPinMain.offsetTop);
+      window.mapPinRestriction.setRestrictionX(window.mapPinMain.offsetLeft);
 
       var shift = {
         x: startCoords.x - moveEvt.clientX,
@@ -76,21 +81,12 @@
       };
 
       var diffCoord = {
-        x: mapPinMain.offsetLeft - shift.x,
-        y: mapPinMain.offsetTop - shift.y
+        x: window.mapPinMain.offsetLeft - shift.x,
+        y: window.mapPinMain.offsetTop - shift.y
       };
 
-      mapPinMain.style.top = diffCoord.y + 'px';
-      mapPinMain.style.left = diffCoord.x + 'px';
-
-      // как лучше ограничить перемещение пина?
-      if (mapPinMain.offsetTop < 130) {
-        document.removeEventListener('mousemove', onMouseMove);
-        mapPinMain.style.top = 130 + 'px';
-      } else if (mapPinMain.offsetTop > 630) {
-        document.removeEventListener('mousemove', onMouseMove);
-        mapPinMain.style.top = 630 + 'px';
-      }
+      window.mapPinMain.style.top = diffCoord.y + 'px';
+      window.mapPinMain.style.left = diffCoord.x + 'px';
 
       setAddressInputValue(diffCoord.x, diffCoord.y);
     };
@@ -98,12 +94,14 @@
     var onMouseUp = function (upEvt) {
       upEvt.preventDefault();
 
-      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mousemove', window.onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
     };
 
-    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mousemove', window.onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
 
   });
 })();
+
+
