@@ -47,7 +47,7 @@
     deleteAttribute(mapFiltersSelector, 'disabled');
     deleteAttribute(mapFiltersInput, 'disabled');
     addressInput.setAttribute('disabled', 'disabled');
-    window.addPin();
+    window.onLoad(window.onSuccess, window.onError);
 
     window.setAddressInputValue(window.mapPinMain.offsetLeft, window.mapPinMain.offsetTop);
     window.mapPinMain.removeEventListener('mouseup', window.onPinActivate);
