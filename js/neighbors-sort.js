@@ -15,6 +15,6 @@
   window.updatePins = updatePins;
 
   typeFilterName.addEventListener('change', function () {
-    updatePins();
+    window.debounce(updatePins);
   });
 })();
