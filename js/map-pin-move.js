@@ -15,8 +15,8 @@
     window.onMouseMove = function (moveEvt) {
       evt.preventDefault();
 
-      window.mapPinRestriction.setRestrictionY(window.mapPinMain.offsetTop);
-      window.mapPinRestriction.setRestrictionX(window.mapPinMain.offsetLeft);
+      window.mapPinRestriction.setRestrictionY(mapPinMain.offsetTop);
+      window.mapPinRestriction.setRestrictionX(mapPinMain.offset);
 
       var shift = {
         x: startCoords.x - moveEvt.clientX,
@@ -29,12 +29,12 @@
       };
 
       var diffCoord = {
-        x: window.mapPinMain.offsetLeft - shift.x,
-        y: window.mapPinMain.offsetTop - shift.y
+        x: mapPinMain.offsetLeft - shift.x,
+        y: mapPinMain.offsetTop - shift.y
       };
 
-      window.mapPinMain.style.top = diffCoord.y + 'px';
-      window.mapPinMain.style.left = diffCoord.x + 'px';
+      mapPinMain.style.top = diffCoord.y + 'px';
+      mapPinMain.style.left = diffCoord.x + 'px';
 
       window.setAddressInputValue(diffCoord.x, diffCoord.y);
     };
