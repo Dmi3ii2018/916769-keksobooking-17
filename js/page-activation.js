@@ -17,13 +17,14 @@
       elementsList[i].setAttribute(attributeName, attributeValue);
     }
   };
+  window.putAttribute = putAttribute;
 
   var deleteAttribute = function (elementsList, attributeName) {
     for (var i = 0; i < elementsList.length; i++) {
       elementsList[i].removeAttribute(attributeName);
     }
   };
-
+  window.deleteAttribute = deleteAttribute;
 
   window.setAddressInputValue = function (coordX, coordY) {
     var addressX = Math.floor(coordX + (window.mapPinWidth / 2));
@@ -47,7 +48,9 @@
     deleteAttribute(mapFiltersSelector, 'disabled');
     deleteAttribute(mapFiltersInput, 'disabled');
     addressInput.setAttribute('disabled', 'disabled');
+
     window.onLoad(window.onSuccess, window.onError);
+    console.log('Hey');
 
     window.setAddressInputValue(window.mapPinMain.offsetLeft, window.mapPinMain.offsetTop);
     window.mapPinMain.removeEventListener('mouseup', window.onPinActivate);
