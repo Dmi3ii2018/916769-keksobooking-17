@@ -6,7 +6,6 @@
   var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
 
   window.sortNeighbors = [];
-  console.log(window.sortNeighbors);
 
   var renderPin = function (neighbor) {
     var mapPin = pinTemplate.cloneNode(true);
@@ -18,6 +17,10 @@
     mapPinImage.src = neighbor.author.avatar;
     mapPinImage.alt = neighbor.offer.type;
 
+    mapPin.addEventListener('click', function () {
+      console.log('Hey');
+    });
+
     return mapPin;
   };
 
@@ -28,7 +31,7 @@
     var dataArray = data.slice(0, SHOW_NEIGHBORS_NUMBER).map(function (it) {
       return new window.Neighbor(it);
     });
-    this.console.log(dataArray);
+    console.log(dataArray);
     dataArray.forEach(function (neighbor) {
       fragment.appendChild(renderPin(neighbor));
     });
