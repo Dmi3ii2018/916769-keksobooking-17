@@ -50,7 +50,6 @@
     addressInput.setAttribute('disabled', 'disabled');
 
     window.onLoad(window.onSuccess, window.onError);
-    console.log('Hey');
 
     window.setAddressInputValue(window.mapPinMain.offsetLeft, window.mapPinMain.offsetTop);
     window.mapPinMain.removeEventListener('mouseup', window.onPinActivate);
