@@ -18,7 +18,7 @@
   window.popupPhotos = popupPhotos;
 
   var renderAdvert = function (data) {
-    var advertPopup = advertTemplate.cloneNode(true);
+    var advertPopup = advertTemplate; //.cloneNode(true);
     popupAvatar.src = data.author.avatar;
     popupTitle.textContent = data.offer.title;
     popupAddress.textContent = data.offer.address;
@@ -28,17 +28,14 @@
     popupTime.textContent = 'Заезд после ' + data.offer.checkin + ', выезд до ' + data.offer.checkout;
     window.Neighbor.prototype.setFeatures(data); // почему нужен прототип?
     popupDescription.textContent = data.offer.description;
-    window.Neighbor.prototype.getPhotoSet(data);
+    var neighbor = new window.Neighbor (data);
+    neighbor.getPhotoSet();
 
     return advertPopup;
   };
 
   var createAdvertPopup = function (data) {
-    var fragment = document.createDocumentFragment();
-    window.advertList = data.forEach(function (advert) {
-      fragment.appendChild(renderAdvert(advert));
-    });
-    mapCardsContainer.insertBefore(fragment, mapFilters);
+    mapCardsContainer.insertBefore(renderAdvert(data), mapFilters);
   };
 
   window.mapCardsContainer = mapCardsContainer;
