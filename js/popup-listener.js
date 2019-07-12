@@ -1,17 +1,20 @@
 'use strict';
 
 (function () {
-  var ESC_KEYCODE = 13;
+  var ESC_KEYCODE = 27;
+  var ENTER_KEYCODE = 13;
 
   var closeAdvert = function () {
     window.advertItems.style = 'display: none';
   };
 
-  var onPinEnterPress = function () {
-
+  var onPopupEnterClose = function (evt) {
+    if (evt.keyCode === ENTER_KEYCODE) {
+      closeAdvert();
+    }
   };
 
-  var onPopupEscPress = function (evt) {
+  var onPopupEscClose = function (evt) {
     if (evt.keyCode === ESC_KEYCODE) {
       closeAdvert();
     }
@@ -23,10 +26,14 @@
         event.preventDefault();
         closeAdvert();
       });
+
+      document.addEventListener('keydown', onPopupEscClose);
+
+      window.closeButton.addEventListener('keydown', function (evt) {
+        onPopupEnterClose(evt);
+      });
     }
-    window.closeButton.addEventListener('keydown', function (evt) {
-      onPopupEscPress(evt);
-    });
   };
+
   window.closePopup = closePopup;
 })();

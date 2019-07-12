@@ -62,14 +62,13 @@
     mapPinsContainer.appendChild(fragment);
 
 
-    allPins = Array.prototype.slice.call(allPins);// данный массив меток будет использоваться для поиска класса 'map__pin--active';
-
+    allPins = Array.prototype.slice.call(allPins);// данный массив с пинами будет использоваться для поиска класса 'map__pin--active';
     window.allPins = allPins;
   };
 
   window.onSuccess = function (neighbor) {
     window.sortNeighbors = neighbor;
     window.updatePins();
-    //window.createAdvertPopup(window.sortNeighbors);
+    // gwindow.createAdvertPopup(window.sortNeighbors);
   };
 })();
