@@ -23,7 +23,6 @@
     return mapPin;
   };
 
-  // новый элемент
   window.getPin = function (data) {
     mapPinsContainer.innerHTML = '';
     var fragment = document.createDocumentFragment();
