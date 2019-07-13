@@ -43,7 +43,6 @@
     return mapPin;
   };
 
-  // новый элемент
   window.getPin = function (data) {
     var fragment = document.createDocumentFragment();
     var mapPinsContainer = document.querySelector('.map__pins');
