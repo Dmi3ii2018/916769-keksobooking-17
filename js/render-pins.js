@@ -68,6 +68,5 @@
   window.onSuccess = function (neighbor) {
     window.sortNeighbors = neighbor;
     window.updatePins();
-    // gwindow.createAdvertPopup(window.sortNeighbors);
   };
 })();

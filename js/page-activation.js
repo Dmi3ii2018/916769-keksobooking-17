@@ -10,7 +10,8 @@
   var adFormInput = adForm.querySelectorAll('input');
   var adFormSelector = adForm.querySelectorAll('select');
   var adFormTextarea = adForm.querySelectorAll('textarea');
-  var addressInput = adForm.querySelector('#address');
+  var addressInput = document.getElementById('address');
+  window.adForm = adForm;
 
   var putAttribute = function (elementsList, attributeName, attributeValue) {
     for (var i = 0; i < elementsList.length; i++) {
@@ -43,16 +44,18 @@
     mapContainer.classList.remove('map--faded');
     adForm.classList.remove('ad-form--disabled');
     deleteAttribute(adFormInput, 'disabled');
+    addressInput.setAttribute('readonly', 'readonly');
     deleteAttribute(adFormSelector, 'disabled');
     deleteAttribute(adFormTextarea, 'disabled');
     deleteAttribute(mapFiltersSelector, 'disabled');
     deleteAttribute(mapFiltersInput, 'disabled');
-    addressInput.setAttribute('disabled', 'disabled');
 
     window.onLoad(window.onSuccess, window.onError);
 
     window.setAddressInputValue(window.mapPinMain.offsetLeft, window.mapPinMain.offsetTop);
+
     window.mapPinMain.removeEventListener('mouseup', window.onPinActivate);
+
   };
 
   window.mapPinMain.addEventListener('mouseup', window.onPinActivate);
