@@ -29,9 +29,7 @@
   Neighbor.prototype = {
     setFeatures: function (data) {
       window.popupFeatures.innerHTML = '';
-      // console.log(window.popupFeatures);
       var featuresList = data.offer.features;
-      // console.log(featuresList);
 
       featuresList.forEach(function (it) {
         var featureItem = document.createElement('li');
@@ -39,13 +37,12 @@
         featureItem.classList.add('popup__feature--' + it);
         window.popupFeatures.appendChild(featureItem);
       });
-      // console.log(window.popupFeatures);
     },
 
-    getPhotoSet: function (data) {
+    getPhotoSet: function () {
       window.popupPhotos.innerHTML = '';
       var fragment = document.createDocumentFragment();
-      var photoList = data.offer.photos;
+      var photoList = this.offer.photos;
 
       photoList.forEach(function (it) {
         var photo = document.createElement('img');

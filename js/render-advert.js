@@ -18,7 +18,7 @@
   window.popupPhotos = popupPhotos;
 
   var renderAdvert = function (data) {
-    var advertPopup = advertTemplate.cloneNode(true);
+    var advertPopup = advertTemplate;
     popupAvatar.src = data.author.avatar;
     popupTitle.textContent = data.offer.title;
     popupAddress.textContent = data.offer.address;
@@ -26,19 +26,16 @@
     popupType.textContent = data.offer.type;
     popupCapacity.textContent = data.offer.rooms + ' комнат(ы) для ' + data.offer.guests + ' гостей';
     popupTime.textContent = 'Заезд после ' + data.offer.checkin + ', выезд до ' + data.offer.checkout;
-    window.Neighbor.prototype.setFeatures(data); // почему нужен прототип?
+    window.Neighbor.prototype.setFeatures(data);
     popupDescription.textContent = data.offer.description;
-    window.Neighbor.prototype.getPhotoSet(data);
+    var neighbor = new window.Neighbor(data);
+    neighbor.getPhotoSet();
 
     return advertPopup;
   };
 
   var createAdvertPopup = function (data) {
-    var fragment = document.createDocumentFragment();
-    window.advertList = data.forEach(function (advert) {
-      fragment.appendChild(renderAdvert(advert));
-    });
-    mapCardsContainer.insertBefore(fragment, mapFilters);
+    mapCardsContainer.insertBefore(renderAdvert(data), mapFilters);
   };
 
   window.mapCardsContainer = mapCardsContainer;
