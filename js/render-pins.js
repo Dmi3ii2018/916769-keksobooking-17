@@ -43,7 +43,6 @@
     return mapPin;
   };
 
-  // новый элемент
   window.getPin = function (data) {
     var fragment = document.createDocumentFragment();
     var mapPinsContainer = document.querySelector('.map__pins');
@@ -69,6 +68,5 @@
   window.onSuccess = function (neighbor) {
     window.sortNeighbors = neighbor;
     window.updatePins();
-    // gwindow.createAdvertPopup(window.sortNeighbors);
   };
 })();
