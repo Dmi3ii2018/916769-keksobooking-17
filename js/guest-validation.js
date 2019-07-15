@@ -11,7 +11,7 @@
   var roomsInput = window.adForm.querySelector('#room_number');
   var guestsInput = window.adForm.querySelector('#capacity');
 
-  var compareRoomsGuest = function (event) {
+  var compareRoomsAndGuests = function (event) {
 
     if (+roomsInput.value === 100 && +guestsInput.value !== 0) { // нормально ли так приводить к числу?
       event.target.setCustomValidity('Эти апартаменты не для гостей');
@@ -26,11 +26,11 @@
 
   guestsInput.addEventListener('change', function (evt) {
     roomsInput.setCustomValidity('');
-    compareRoomsGuest(evt);
+    compareRoomsAndGuests(evt);
   });
 
   roomsInput.addEventListener('change', function (evt) {
     guestsInput.setCustomValidity('');
-    compareRoomsGuest(evt);
+    compareRoomsAndGuests(evt);
   });
 })();

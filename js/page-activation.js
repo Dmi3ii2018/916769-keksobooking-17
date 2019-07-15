@@ -52,7 +52,7 @@
 
     window.onLoad(window.onSuccess, window.onError);
 
-    window.setAddressInputValue(window.mapPinMain.offsetLeft, window.mapPinMain.offsetTop);
+    window.setAddressInputValue(window.mapPinRestriction.pinStartCoordX, window.mapPinRestriction.pinStartCoordY);
 
     window.mapPinMain.removeEventListener('mouseup', window.onPinActivate);
 
