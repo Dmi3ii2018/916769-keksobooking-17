@@ -2,6 +2,7 @@
 
 (function () {
   var main = document.querySelector('main');
+  window.main = main;
   var form = document.querySelector('.ad-form');
   // var submitButton = document.querySelector('.ad-form__submit');
 
@@ -23,13 +24,15 @@
     window.mapPinMain.style.left = window.mapPinRestriction.pinStartCoordX + 'px';
     window.setAddressInputValue(window.mapPinRestriction.pinStartCoordX, window.mapPinRestriction.pinStartCoordY);
 
-    try { // Допустимо?
+    try {
       window.checkItemPresent(window.advertItems);
     } catch (err) {
-      console.log('There is no any advert opened'); // что здесь прописать?
+      console.log('There is no any advert opened');
     }
 
     window.mapPinMain.addEventListener('mouseup', onMainPinClick);
+
+    window.successPopup = document.querySelector('.success');
 
     window.closeSuccessPopup();
   };
@@ -38,13 +41,16 @@
     var errorTemplate = document.querySelector('#error').content.querySelector('.error');
     var errorPopup = errorTemplate.cloneNode(true);
     main.appendChild(errorPopup);
+
+    window.errorPopup = document.querySelector('.error');
+
+    window.closeErrorPopup();
+
   };
 
   form.addEventListener('submit', function (evt) {
     evt.preventDefault();
 
     window.getLoad(new FormData(form), successHandler, errorHandler);
-
-    console.log('to reset');
   });
 })();

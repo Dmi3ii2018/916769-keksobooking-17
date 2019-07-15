@@ -1,31 +1,29 @@
 'use strict';
 
 (function () {
-  var ESC_KEYCODE = 32;
-  var ENTER_KEYCODE = 13;
+  window.ESC_KEYCODE = 27;
+  window.ENTER_KEYCODE = 13;
+  // var successPopup = window.onSuccessPopup;
+
+  // window.successPopup = successPopup;
 
   var hidePopup = function () {
-    var successPopup = document.querySelector('.success');
-    successPopup.style = 'display: none';
+    window.successPopup.style = 'display: none';
+    document.removeEventListener('keydown', escHidePopup);
   };
 
-  var escHidePopup = function() {
-    if (evt.keyCode === ESC_KEYCODE) {
-      hidePopup(successPopup);
+  var escHidePopup = function (evt) {
+    if (evt.keyCode === window.ESC_KEYCODE) {
+      hidePopup(window.successPopup);
     }
   };
 
   var closeSuccessPopup = function () {
+    window.successPopup.addEventListener('click', hidePopup);
 
-    successPopup.addEventListener('click', function () {
-      hidePopup(successPopup);
-    });
+    document.addEventListener('keydown', escHidePopup);
 
-    document.addEventListener('keydown', function (evt) {
-
-    });
-
-    successPopup.removeEventListener('click', hidePopup); // как удалить обработчик событий?
+    window.successPopup.removeEventListener('click', hidePopup);
   };
 
   window.closeSuccessPopup = closeSuccessPopup;
@@ -36,13 +34,13 @@
   };
 
   var onPopupEnterClose = function (evt) {
-    if (evt.keyCode === ENTER_KEYCODE) {
+    if (evt.keyCode === window.ENTER_KEYCODE) {
       closeAdvert();
     }
   };
 
   var onPopupEscClose = function (evt) {
-    if (evt.keyCode === ESC_KEYCODE) {
+    if (evt.keyCode === window.ESC_KEYCODE) {
       closeAdvert();
     }
   };
