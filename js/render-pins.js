@@ -10,7 +10,7 @@
   window.sortNeighbors = [];
 
   window.checkItemPresent = function (item) {
-    if (item !== null) {
+    if (item !== null || item !== undefined) {
       window.mapContainer.removeChild(item);
     }
   };

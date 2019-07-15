@@ -24,11 +24,7 @@
     window.mapPinMain.style.left = window.mapPinRestriction.pinStartCoordX + 'px';
     window.setAddressInputValue(window.mapPinRestriction.pinStartCoordX, window.mapPinRestriction.pinStartCoordY);
 
-    try {
-      window.checkItemPresent(window.advertItems);
-    } catch (err) {
-      console.log('There is no any advert opened');
-    }
+    window.checkItemPresent(window.advertItems);
 
     window.mapPinMain.addEventListener('mouseup', onMainPinClick);
 
