@@ -14,6 +14,9 @@
   };
 
   window.mapPinRestriction = {
+    pinStartCoordX: window.mapPinMain.offsetLeft,
+    pinStartCoordY: window.mapPinMain.offsetTop,
+
     setRestrictionY: function (coord) {
       if (coord < limits.top) {
         document.removeEventListener('mousemove', window.onMouseMove);
