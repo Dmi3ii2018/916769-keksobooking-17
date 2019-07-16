@@ -10,7 +10,7 @@
   window.sortNeighbors = [];
 
   window.checkItemPresent = function (item) {
-    if (item !== null || item !== undefined) {
+    if (item !== null && item !== undefined) {
       window.mapContainer.removeChild(item);
     }
   };
@@ -74,5 +74,6 @@
   window.onSuccess = function (neighbor) {
     window.sortNeighbors = neighbor;
     window.updatePins();
+    console.log(neighbor);
   };
 })();

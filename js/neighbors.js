@@ -25,7 +25,7 @@
       y: data.location.y
     };
   };
-  // вопрос для созвона почему работает?
+
   Neighbor.prototype = {
     setFeatures: function (data) {
       window.popupFeatures.innerHTML = '';
