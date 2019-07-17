@@ -2,18 +2,21 @@
 
 (function () {
   var mapFilter = document.querySelector('.map__filters');
-  var typeFilter = mapFilter.querySelector('#housing-type');
   var roomsFilter = mapFilter.querySelector('#housing-rooms');
   var guestsFilter = mapFilter.querySelector('#housing-guests');
 
-  var filteredPins = [];
-  window.filteredPins = filteredPins;
+  var checkFilterChange = function () {
+    window.setTypeFilter();
+    window.setPriceFilter();
+    window.getPin(window.filteredPins);
+  };
 
   window.priceFilter.addEventListener('change', function () {
-    window.filteredPins = window.sortNeighbors.slice();
-    window.setPriceFilter();
+    checkFilterChange();
+  });
 
-    window.getPin(window.filteredPins);
+  window.typeFilter.addEventListener('change', function () {
+    checkFilterChange();
   });
 })();
 
