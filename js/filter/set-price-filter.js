@@ -11,7 +11,7 @@
   var setPriceFilter = function () {
     window.filteredPins = window.filteredPins.filter(function (it) {
       if (priceFilter.value === 'middle') {
-        return it.offer.price > FILTER_MIDDLE_PRICE_ONE && it.offer.price < FILTER_MIDDLE_PRICE_TWO;
+        return it.offer.price >= FILTER_MIDDLE_PRICE_ONE && it.offer.price <= FILTER_MIDDLE_PRICE_TWO;
 
       } else if (priceFilter.value === 'low') {
         return it.offer.price < FILTER_MIDDLE_PRICE_ONE;

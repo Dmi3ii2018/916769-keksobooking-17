@@ -6,10 +6,8 @@
 
   var setTypeFilter = function () {
     window.filteredPins = window.sortNeighbors;
-    if (typeFilter.value === 'any') {
-      window.getPin(window.sortNeighbors);
-    } else {
-      window.filteredPins = window.sortNeighbors.filter(function (it) {
+    if (typeFilter.value !== 'any') {
+      window.filteredPins = window.filteredPins.filter(function (it) {
         return it.offer.type === typeFilter.value;
       });
     }
