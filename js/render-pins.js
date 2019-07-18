@@ -74,7 +74,6 @@
   window.onSuccess = function (neighbor) {
     window.sortNeighbors = neighbor;
     window.updatePins();
-    console.log(neighbor);
     window.filteredPins = window.sortNeighbors.slice(); // массив будет использоваться для фильтра
   };
 })();

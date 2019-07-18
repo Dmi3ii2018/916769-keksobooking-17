@@ -12,37 +12,35 @@
   var featuresContainer = document.querySelector('#housing-features');
   var featuresList = Array.from(featuresContainer.querySelectorAll('.map__checkbox'));
 
-  var setFeaturesFilter = function () {
-    var checkedItems = featuresList.filter(function (it) {
-      return it.checked;
-    });
-    var features = checkedItems.map(function (it) {
-      return it.value;
-    });
-    console.log(features);
-
-    // window.filteredPins = window.sortNeighbors.filter(function (it) {
-    //   features.forEach(function (element) {
-    //     element.some(it);
-    //   });
-    // });
-
-    for (var i = 0; i < features.length; i++) {
-      for (var q = 0; q < window.sortNeighbors; q++) {
-        if (features[i] === window.sortNeighbors[q].offer.features) {
-          continue;
-        } else {
-          break;
-        }
+  var checkFeaturesFilter = function () {
+    for (var i = 0; i < featuresList.length; i++) {
+      if (featuresList[i].checked) {
+        window.filteredPins = window.filteredPins.filter(function (it) {
+          return it.offer.features.includes(featuresList[i].value);
+        });
       }
     }
+  };
 
-    console.log(window.filteredPins);
+  window.checkFeaturesFilter = checkFeaturesFilter;
+
+  var setFeaturesFilter = function (evt) {
+    evt.preventDefault();
+
+    window.checkFilterChange();
+
+    checkFeaturesFilter();
+
+    window.checkItemPresent(window.advertItems);
+
+    window.getPin(window.filteredPins);
 
     return window.filteredPins;
+
   };
 
   featuresList.forEach(function (it) {
     it.addEventListener('change', setFeaturesFilter);
   });
 })();
+

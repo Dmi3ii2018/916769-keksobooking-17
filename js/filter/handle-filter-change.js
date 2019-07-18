@@ -9,13 +9,16 @@
     window.setPriceFilter();
     window.setFilterRooms();
     window.setGuestFilter();
-    window.getPin(window.filteredPins);
-    window.checkItemPresent(window.advertItems);
   };
+
+  window.checkFilterChange = checkFilterChange;
 
   selectFilter.forEach(function (it) {
     it.addEventListener('change', function () {
       checkFilterChange();
+      window.checkFeaturesFilter();
+      window.getPin(window.filteredPins);
+      window.checkItemPresent(window.advertItems);
     });
   });
 })();
