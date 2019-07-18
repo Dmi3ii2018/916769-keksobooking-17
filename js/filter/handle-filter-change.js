@@ -17,7 +17,7 @@
     it.addEventListener('change', function () {
       checkFilterChange();
       window.checkFeaturesFilter();
-      window.getPin(window.filteredPins);
+      window.debounce(window.render);
       window.checkItemPresent(window.advertItems);
     });
   });

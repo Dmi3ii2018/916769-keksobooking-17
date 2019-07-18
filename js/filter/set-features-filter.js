@@ -24,17 +24,19 @@
 
   window.checkFeaturesFilter = checkFeaturesFilter;
 
+  window.render = function () {
+    window.getPin(window.filteredPins);
+  };
+
   var setFeaturesFilter = function (evt) {
     evt.preventDefault();
 
     window.checkFilterChange();
-
     checkFeaturesFilter();
 
     window.checkItemPresent(window.advertItems);
 
-    window.getPin(window.filteredPins);
-
+    window.debounce(window.render);
     return window.filteredPins;
 
   };
