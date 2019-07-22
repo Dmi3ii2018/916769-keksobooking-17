@@ -9,7 +9,7 @@
   var limits = {
     top: 130 + window.mapContainer.offsetTop,
     right: window.mapContainer.offsetWidth - window.mapPinWidth,
-    bottom: 630 + window.mapContainer.offsetTop,
+    bottom: 610 + window.mapContainer.offsetTop,
     left: 0
   };
 
@@ -37,12 +37,3 @@
     }
   };
 })();
-
-// var restrict = [131, 630];
-// //console.log(window.mapPinMain.offsetTop);
-// switch (window.mapPinMain.offsetTop) {
-//   case restrict[0]:
-//     document.removeEventListener('mousemove', window.onMouseMove);
-//     window.mapPinMain.style.top = restrict[0] + 'px';
-//     break;
-// }

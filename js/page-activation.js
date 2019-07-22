@@ -12,20 +12,20 @@
   var adFormTextarea = adForm.querySelectorAll('textarea');
   var addressInput = document.getElementById('address');
   window.adForm = adForm;
+  window.adFormInput = adFormInput;
+  window.adFormSelector = adFormSelector;
 
   var putAttribute = function (elementsList, attributeName, attributeValue) {
     for (var i = 0; i < elementsList.length; i++) {
       elementsList[i].setAttribute(attributeName, attributeValue);
     }
   };
-  window.putAttribute = putAttribute;
 
   var deleteAttribute = function (elementsList, attributeName) {
     for (var i = 0; i < elementsList.length; i++) {
       elementsList[i].removeAttribute(attributeName);
     }
   };
-  window.deleteAttribute = deleteAttribute;
 
   window.setAddressInputValue = function (coordX, coordY) {
     var addressX = Math.floor(coordX + (window.mapPinWidth / 2));
@@ -33,14 +33,17 @@
     addressInput.setAttribute('value', addressX + ', ' + addressY);
   };
 
-  // добавим атрибут disabled для полей форм
-  putAttribute(adFormInput, 'disabled', 'disabled');
-  putAttribute(adFormSelector, 'disabled', 'disabled');
-  putAttribute(adFormTextarea, 'disabled', 'disabled');
-  putAttribute(mapFiltersSelector, 'disabled', 'disabled');
-  putAttribute(mapFiltersInput, 'disabled', 'disabled');
+  var deactPage = function () {
+    putAttribute(adFormInput, 'disabled', 'disabled');
+    putAttribute(adFormSelector, 'disabled', 'disabled');
+    putAttribute(adFormTextarea, 'disabled', 'disabled');
+    putAttribute(mapFiltersSelector, 'disabled', 'disabled');
+    putAttribute(mapFiltersInput, 'disabled', 'disabled');
+  };
 
-  window.onPinActivate = function () {
+  deactPage();
+
+  var onPinActivate = function () {
     mapContainer.classList.remove('map--faded');
     adForm.classList.remove('ad-form--disabled');
     deleteAttribute(adFormInput, 'disabled');
@@ -54,10 +57,10 @@
 
     window.setAddressInputValue(window.mapPinRestriction.pinStartCoordX, window.mapPinRestriction.pinStartCoordY);
 
-    window.mapPinMain.removeEventListener('mouseup', window.onPinActivate);
+    window.mapPinMain.removeEventListener('mouseup', onPinActivate);
 
   };
 
-  window.mapPinMain.addEventListener('mouseup', window.onPinActivate);
+  window.mapPinMain.addEventListener('mouseup', onPinActivate);
 
 })();

@@ -4,7 +4,7 @@
   var hidePopup = function () {
     window.main.removeChild(window.errorPopup);
     document.removeEventListener('keydown', escHidePopup);
-    window.errorPopup.removeEventListener('click', hidePopup); // как удалить обработчик событий?
+    window.errorPopup.removeEventListener('click', hidePopup);
   };
 
   var escHidePopup = function (evt) {

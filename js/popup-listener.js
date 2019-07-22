@@ -3,62 +3,56 @@
 (function () {
   window.ESC_KEYCODE = 27;
   window.ENTER_KEYCODE = 13;
-  // var successPopup = window.onSuccessPopup;
 
-  // window.successPopup = successPopup;
-
-  var hidePopup = function () {
+  var onSuccessPopupClick = function () {
     window.successPopup.style = 'display: none';
-    document.removeEventListener('keydown', escHidePopup);
+    document.removeEventListener('keydown', onPopupEscClose);
   };
 
-  var escHidePopup = function (evt) {
-    if (evt.keyCode === window.ESC_KEYCODE) {
-      hidePopup(window.successPopup);
-    }
-  };
-
-  var closeSuccessPopup = function () {
-    window.successPopup.addEventListener('click', hidePopup);
-
-    document.addEventListener('keydown', escHidePopup);
-
-    window.successPopup.removeEventListener('click', hidePopup);
-  };
-
-  window.closeSuccessPopup = closeSuccessPopup;
-
-  var closeAdvert = function () {
-    window.advertItems.style = 'display: none';
-    window.checkPinActiveClass();
-  };
-
-  var onPopupEnterClose = function (evt) {
+  var onPopupEnterClose = function (evt, cb) {
     if (evt.keyCode === window.ENTER_KEYCODE) {
-      closeAdvert();
+      cb();
     }
   };
 
-  var onPopupEscClose = function (evt) {
+  var onPopupEscClose = function (evt, cb) {
     if (evt.keyCode === window.ESC_KEYCODE) {
-      closeAdvert();
+      cb();
     }
+    document.removeEventListener('keydown', onPopupEscClose);
   };
 
-  var closePopup = function () {
-    if (window.advertItems !== null) {
-      window.closeButton.addEventListener('click', function (event) {
-        event.preventDefault();
-        closeAdvert();
+  window.popupListenerUtil = {
+    closeSuccessPopup: function () {
+      window.successPopup.addEventListener('click', onSuccessPopupClick);
+
+      document.addEventListener('keydown', function (evt) {
+        onPopupEscClose(evt, onSuccessPopupClick);
       });
 
-      document.addEventListener('keydown', onPopupEscClose);
+      window.successPopup.removeEventListener('click', onSuccessPopupClick);
+    },
 
-      window.closeButton.addEventListener('keydown', function (evt) {
-        onPopupEnterClose(evt);
-      });
+    closeAdvert: function () {
+      window.advertItems.style = 'display: none';
+      window.checkPinActiveClass();
+    },
+
+    closePopup: function () {
+      if (window.advertItems !== null) {
+        window.closeButton.addEventListener('click', function (event) {
+          event.preventDefault();
+          window.popupListenerUtil.closeAdvert();
+        });
+
+        document.addEventListener('keydown', function (evt) {
+          onPopupEscClose(evt, window.popupListenerUtil.closeAdvert);
+        });
+
+        window.closeButton.addEventListener('keydown', function (evt) {
+          onPopupEnterClose(evt, window.popupListenerUtil.closeAdvert);
+        });
+      }
     }
   };
-
-  window.closePopup = closePopup;
 })();

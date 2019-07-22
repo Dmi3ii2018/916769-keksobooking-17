@@ -16,7 +16,7 @@
       evt.preventDefault();
 
       window.mapPinRestriction.setRestrictionY(mapPinMain.offsetTop);
-      window.mapPinRestriction.setRestrictionX(mapPinMain.offset);
+      window.mapPinRestriction.setRestrictionX(mapPinMain.offsetLeft);
 
       var shift = {
         x: startCoords.x - moveEvt.clientX,

@@ -1,15 +1,7 @@
-// 1) клик по чекбокс
-// 2) фильтруем в новый массив все отмеченные преим-ва
-// преимуществы вычленить из кнопок в отдельный массив.
-// 3) Оставить только те объявления которые соответствуют всем пар-м.
-//     window.filteredPins
-// 4) Нужно брать выбранные элементы преим-ва и сравнвать со всеми имею-ся у обявления.
-//    Все должны присутствовать в объявлении.
-
 'use strict';
 
 (function () {
-  var featuresContainer = document.querySelector('#housing-features');
+  var featuresContainer = document.querySelector('.map__features');
   var featuresList = Array.from(featuresContainer.querySelectorAll('.map__checkbox'));
 
   var checkFeaturesFilter = function () {

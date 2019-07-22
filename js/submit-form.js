@@ -4,12 +4,14 @@
   var main = document.querySelector('main');
   window.main = main;
   var form = document.querySelector('.ad-form');
-  // var submitButton = document.querySelector('.ad-form__submit');
+  var submitButton = document.querySelector('.ad-form__submit');
 
   var onMainPinClick = function () {
     window.updatePins();
     window.mapPinMain.removeEventListener('mouseup', onMainPinClick);
   };
+
+  window.onMainPinClick = onMainPinClick;
 
   var successHandler = function () {
     var successTemplate = document.querySelector('#success').content.querySelector('.success');
@@ -17,19 +19,7 @@
     main.appendChild(successPopup);
 
     form.reset();
-    window.mapPinsContainer.innerHTML = '';
-    window.mapPinsContainer.appendChild(window.mapPinMain);
-
-    window.mapPinMain.style.top = window.mapPinRestriction.pinStartCoordY + 'px';
-    window.mapPinMain.style.left = window.mapPinRestriction.pinStartCoordX + 'px';
-    window.setAddressInputValue(window.mapPinRestriction.pinStartCoordX, window.mapPinRestriction.pinStartCoordY);
-
-    window.checkItemPresent(window.advertItems);
-
-    window.mapPinMain.addEventListener('mouseup', onMainPinClick);
-
-    window.successPopup = document.querySelector('.success');
-
+    window.resetForm();
     window.closeSuccessPopup();
   };
 
@@ -44,9 +34,26 @@
 
   };
 
+  var checkValidity = function (item) {
+    for (var i = 0; i < item.length; i++) {
+      var input = item[i];
+      if (input.checkValidity() === false) {
+        input.style = 'border: 1px solid #ff6547';
+      } else {
+        input.style = 'border: 1px solid #d9d9d3';
+      }
+    }
+  };
+
   form.addEventListener('submit', function (evt) {
     evt.preventDefault();
 
     window.getLoad(new FormData(form), successHandler, errorHandler);
   });
+
+  submitButton.addEventListener('click', function () {
+    checkValidity(window.adFormInput);
+    checkValidity(window.adFormSelector);
+  });
 })();
+
