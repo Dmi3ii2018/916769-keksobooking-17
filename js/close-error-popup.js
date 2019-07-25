@@ -1,22 +1,22 @@
 'use strict';
 
 (function () {
-  var hidePopup = function () {
+  var onErrorPopupClick = function () {
     window.main.removeChild(window.errorPopup);
-    document.removeEventListener('keydown', escHidePopup);
-    window.errorPopup.removeEventListener('click', hidePopup);
+    document.removeEventListener('keydown', onEscClick);
+    window.errorPopup.removeEventListener('click', onErrorPopupClick);
   };
 
-  var escHidePopup = function (evt) {
+  var onEscClick = function (evt) {
     if (evt.keyCode === window.ESC_KEYCODE) {
-      hidePopup(window.errorPopup);
+      onErrorPopupClick();
     }
   };
 
   var closeErrorPopup = function () {
-    window.errorPopup.addEventListener('click', hidePopup);
+    window.errorPopup.addEventListener('click', onErrorPopupClick);
 
-    document.addEventListener('keydown', escHidePopup);
+    document.addEventListener('keydown', onEscClick);
 
   };
 

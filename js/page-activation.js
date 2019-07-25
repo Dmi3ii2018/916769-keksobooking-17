@@ -16,20 +16,20 @@
   window.adFormSelector = adFormSelector;
 
   var putAttribute = function (elementsList, attributeName, attributeValue) {
-    for (var i = 0; i < elementsList.length; i++) {
-      elementsList[i].setAttribute(attributeName, attributeValue);
-    }
+    elementsList.forEach(function (it) {
+      it.setAttribute(attributeName, attributeValue);
+    });
   };
 
   var deleteAttribute = function (elementsList, attributeName) {
-    for (var i = 0; i < elementsList.length; i++) {
-      elementsList[i].removeAttribute(attributeName);
-    }
+    elementsList.forEach(function (it) {
+      it.removeAttribute(attributeName);
+    });
   };
 
   window.setAddressInputValue = function (coordX, coordY) {
     var addressX = Math.floor(coordX + (window.mapPinWidth / 2));
-    var addressY = Math.floor(coordY + window.mapPinHeight);
+    var addressY = Math.floor(coordY);
     addressInput.setAttribute('value', addressX + ', ' + addressY);
   };
 

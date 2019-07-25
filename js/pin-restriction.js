@@ -1,15 +1,18 @@
 'use strict';
 
 (function () {
+  var MAINPIN_TOP_RESTRICTION = 130;
+  var MAINPIN_BOTTOM_RESTRICTION = 630;
+
   var mapPinWidth = window.mapPinMain.offsetWidth;
-  var mapPinHeight = window.mapPinMain.offsetHeight + 22;
+  var mapPinHeight = window.mapPinMain.offsetHeight;
   window.mapPinWidth = mapPinWidth;
   window.mapPinHeight = mapPinHeight;
 
   var limits = {
-    top: 130 + window.mapContainer.offsetTop,
+    top: MAINPIN_TOP_RESTRICTION,
     right: window.mapContainer.offsetWidth - window.mapPinWidth,
-    bottom: 610 + window.mapContainer.offsetTop,
+    bottom: MAINPIN_BOTTOM_RESTRICTION,
     left: 0
   };
 

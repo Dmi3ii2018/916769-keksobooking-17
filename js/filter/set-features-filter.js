@@ -20,7 +20,7 @@
     window.getPin(window.filteredPins);
   };
 
-  var setFeaturesFilter = function (evt) {
+  var onFeaturesClick = function (evt) {
     evt.preventDefault();
 
     window.checkFilterChange();
@@ -34,7 +34,7 @@
   };
 
   featuresList.forEach(function (it) {
-    it.addEventListener('change', setFeaturesFilter);
+    it.addEventListener('change', onFeaturesClick);
   });
 })();
 

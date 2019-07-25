@@ -35,14 +35,14 @@
   };
 
   var checkValidity = function (item) {
-    for (var i = 0; i < item.length; i++) {
-      var input = item[i];
-      if (input.checkValidity() === false) {
+    item.forEach(function (it) {
+      var input = it;
+      if (!input.checkValidity()) {
         input.style = 'border: 1px solid #ff6547';
       } else {
         input.style = 'border: 1px solid #d9d9d3';
       }
-    }
+    });
   };
 
   form.addEventListener('submit', function (evt) {

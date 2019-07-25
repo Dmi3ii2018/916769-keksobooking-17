@@ -11,7 +11,6 @@
 
   window.checkItemPresent = function (item) {
     if (item !== null && item !== undefined) {
-      this.console.log(item);
       window.popupListenerUtil.closeAdvert();
     }
   };

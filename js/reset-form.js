@@ -3,7 +3,7 @@
 (function () {
   var resetButton = document.querySelector('.ad-form__reset');
 
-  var resetForm = function () {
+  var onResetButtonClick = function () {
     window.mapPinsContainer.innerHTML = '';
     window.mapPinsContainer.appendChild(window.mapPinMain);
 
@@ -18,7 +18,7 @@
     window.successPopup = document.querySelector('.success');
   };
 
-  resetButton.addEventListener('click', resetForm);
+  resetButton.addEventListener('click', onResetButtonClick);
 
-  window.resetForm = resetForm;
+  window.resetForm = onResetButtonClick;
 })();
