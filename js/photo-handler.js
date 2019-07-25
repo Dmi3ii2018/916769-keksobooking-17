@@ -12,6 +12,7 @@
   var photoContainer = document.querySelector('.ad-form__photo');
 
   fotoChooser.addEventListener('change', function () {
+
     var image = document.createElement('img');
     image.width = 40;
     image.height = 44;
