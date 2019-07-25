@@ -6,7 +6,7 @@
   var roomsInput = window.adForm.querySelector('#room_number');
   var guestsInput = window.adForm.querySelector('#capacity');
 
-  var compareRoomsAndGuests = function (event) {
+  var onGuestFormClick = function (event) {
 
     if (+roomsInput.value === MAX_ROOMS_AMOUNT && +guestsInput.value !== 0) {
       event.target.setCustomValidity('Эти апартаменты не для гостей');
@@ -24,11 +24,11 @@
 
   guestsInput.addEventListener('change', function (evt) {
     roomsInput.setCustomValidity('');
-    compareRoomsAndGuests(evt);
+    onGuestFormClick(evt);
   });
 
   roomsInput.addEventListener('change', function (evt) {
     guestsInput.setCustomValidity('');
-    compareRoomsAndGuests(evt);
+    onGuestFormClick(evt);
   });
 })();

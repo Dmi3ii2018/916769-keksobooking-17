@@ -33,7 +33,7 @@
       window.successPopup.removeEventListener('click', onSuccessPopupClick);
     },
 
-    closeAdvert: function () {
+    onCloseButtonClick: function () {
       window.advertItems.style = 'display: none';
       window.checkPinActiveClass();
     },
@@ -42,15 +42,15 @@
       if (window.advertItems !== null) {
         window.closeButton.addEventListener('click', function (event) {
           event.preventDefault();
-          window.popupListenerUtil.closeAdvert();
+          window.popupListenerUtil.onCloseButtonClick();
         });
 
         document.addEventListener('keydown', function (evt) {
-          onPopupEscClose(evt, window.popupListenerUtil.closeAdvert);
+          onPopupEscClose(evt, window.popupListenerUtil.onCloseButtonClick);
         });
 
         window.closeButton.addEventListener('keydown', function (evt) {
-          onPopupEnterClose(evt, window.popupListenerUtil.closeAdvert);
+          onPopupEnterClose(evt, window.popupListenerUtil.onCloseButtonClick);
         });
       }
     }
