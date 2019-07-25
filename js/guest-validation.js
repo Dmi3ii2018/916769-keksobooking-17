@@ -11,7 +11,7 @@
     if (+roomsInput.value === MAX_ROOMS_AMOUNT && +guestsInput.value !== 0) {
       event.target.setCustomValidity('Эти апартаменты не для гостей');
 
-    } if (+roomsInput.value !== MAX_ROOMS_AMOUNT && +guestsInput.value === 0) {
+    } else if (+roomsInput.value !== MAX_ROOMS_AMOUNT && +guestsInput.value === 0) {
       guestsInput.setCustomValidity('Укажите количество гостей');
 
     } else if (+guestsInput.value > +roomsInput.value) {
