@@ -114,15 +114,15 @@
         <fieldset class="ad-form__element">
           <label class="ad-form__label" for="type">Тип жилья</label>
           <select id="type" name="type" required>
-            <option value="bungalo">Бунгало</option>
-            <option value="flat" selected>Квартира</option>
+            <option value="bungalo" selected>Бунгало</option>
+            <option value="flat">Квартира</option>
             <option value="house">Дом</option>
             <option value="palace">Дворец</option>
           </select>
         </fieldset>
         <fieldset class="ad-form__element">
           <label class="ad-form__label" for="price">Цена за ночь, руб.</label>
-          <input id="price" name="price" type="number" min = "0" max = "1000000" placeholder="5000" required>
+          <input id="price" name="price" type="number" min = "0" max = "1000000" placeholder="0" required>
         </fieldset>
         <fieldset class="ad-form__element ad-form__element--time">
           <label class="ad-form__label" for="timein">Время заезда и выезда</label>
@@ -254,10 +254,8 @@
       <button class="error__button" href="#">Попробовать снова</button>
     </div>
   </template>
-<script src="js/debounce.js"></script>
 <script src="js/neighbors.js"></script>
 <script src="js/on-error.js"></script>
-<script src="js/update-pins.js"></script>
 <script src="js/backend.js"></script>
 <script src="js/check-pin-active-class.js"></script>
 <script src="js/render-pins.js"></script>
@@ -267,9 +265,21 @@
 <script src="js/render-advert.js"></script>
 <script src="js/guest-validation.js"></script>
 <script src="js/get-load.js"></script>
+<script src="js/set-type-min-price.js"></script>
+<script src="js/set-chekin-time.js"></script>
+<script src="js/reset-form.js"></script>
 <script src="js/submit-form.js"></script>
 <script src="js/popup-listener.js"></script>
 <script src="js/success-popup-close.js"></script>
 <script src="js/close-error-popup.js"></script>
+<script src="js/filter/set-rooms-filter.js"></script>
+<script src="js/filter/set-price-filter.js"></script>
+<script src="js/filter/set-type-filter.js"></script>
+<script src="js/filter/set-guests-filter.js"></script>
+<script src="js/filter/set-features-filter.js"></script>
+<script src="js/filter/handle-filter-change.js"></script>
+<script src="js/debounce.js"></script>
+<script src="js/upload-image.js"></script>
+<script src="js/photo-handler.js"></script>
 </body>
 </html>

@@ -1,20 +1,18 @@
 'use strict';
-// нужна одна функция которая бутет использ-ся в обоих инпутах. Для кол-ва гостей она
-// будет добавлена в обработчик change. В количестве комнат так же, как обработчик событий.
-// Структура данных.
-// rooms = {
-//  1_room: 1 guest;
-//  2_rooms: 1 guest || 2 guests;
-// }
 
 (function () {
+  var MAX_ROOMS_AMOUNT = 100;
+
   var roomsInput = window.adForm.querySelector('#room_number');
   var guestsInput = window.adForm.querySelector('#capacity');
 
   var compareRoomsAndGuests = function (event) {
 
-    if (+roomsInput.value === 100 && +guestsInput.value !== 0) { // нормально ли так приводить к числу?
+    if (+roomsInput.value === MAX_ROOMS_AMOUNT && +guestsInput.value !== 0) {
       event.target.setCustomValidity('Эти апартаменты не для гостей');
+
+    } if (+roomsInput.value !== MAX_ROOMS_AMOUNT && +guestsInput.value === 0) {
+      guestsInput.setCustomValidity('Укажите количество гостей');
 
     } else if (+guestsInput.value > +roomsInput.value) {
       event.target.setCustomValidity('Количество гостей не должно превышать количества комнат');

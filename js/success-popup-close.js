@@ -1,26 +1,22 @@
 'use strict';
 
 (function () {
-  // var successPopup = window.onSuccessPopup;
-
-  // window.successPopup = successPopup; // нежен?
-
-  var hidePopup = function () {
+  var onSuccessPopupClick = function () {
     window.main.removeChild(window.successPopup);
-    document.removeEventListener('keydown', escHidePopup);
-    window.successPopup.removeEventListener('click', hidePopup); // как удалить обработчик событий?
+    document.removeEventListener('keydown', onEscClick);
+    window.successPopup.removeEventListener('click', onSuccessPopupClick);
   };
 
-  var escHidePopup = function (evt) {
+  var onEscClick = function (evt) {
     if (evt.keyCode === window.ESC_KEYCODE) {
-      hidePopup(window.successPopup);
+      onSuccessPopupClick();
     }
   };
 
   var closeSuccessPopup = function () {
-    window.successPopup.addEventListener('click', hidePopup);
+    window.successPopup.addEventListener('click', onSuccessPopupClick);
 
-    document.addEventListener('keydown', escHidePopup);
+    document.addEventListener('keydown', onEscClick);
 
   };
 

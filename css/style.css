@@ -758,8 +758,6 @@ fieldset {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
 }
 
 .ad-form__upload {
@@ -806,11 +804,15 @@ fieldset {
 }
 
 .ad-form__photo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
   margin-right: 10px;
   margin-bottom: 10px;
 
-  width: 70px;
-  height: 70px;
+  width: 100%;
+  height: auto;
 
   background-color: #e4e4de;
   border-radius: 5px;
